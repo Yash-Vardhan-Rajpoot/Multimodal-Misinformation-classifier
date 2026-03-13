@@ -1,8 +1,0 @@
-streamlit==1.33.0
-torch==2.2.2
-torchvision==0.17.2
-transformers==4.39.3
-pillow==10.2.0
-numpy==1.26.4
-scikit-learn==1.4.1
-pandas==2.2.1
