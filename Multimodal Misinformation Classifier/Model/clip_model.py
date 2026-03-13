@@ -15,11 +15,13 @@ class CLIPEncoder:
         inputs = {k: v.to(self.device) for k, v in inputs.items()}
         with torch.no_grad():
             image_features = self.model.get_image_features(**inputs)
-        # Handle both raw tensor and BaseModelOutputWithPooling object
-        if hasattr(image_features, 'image_embeds'):
-            image_features = image_features.image_embeds
-        elif hasattr(image_features, 'pooler_output'):
-            image_features = image_features.pooler_output
+        if not isinstance(image_features, torch.Tensor):
+            if hasattr(image_features, 'image_embeds'):
+                image_features = image_features.image_embeds
+            elif hasattr(image_features, 'pooler_output'):
+                image_features = image_features.pooler_output
+            else:
+                image_features = image_features.last_hidden_state[:, 0, :]
         return image_features.cpu()
 
     def encode_text(self, text):
@@ -27,9 +29,11 @@ class CLIPEncoder:
         inputs = {k: v.to(self.device) for k, v in inputs.items()}
         with torch.no_grad():
             text_features = self.model.get_text_features(**inputs)
-        # Handle both raw tensor and BaseModelOutputWithPooling object
-        if hasattr(text_features, 'text_embeds'):
-            text_features = text_features.text_embeds
-        elif hasattr(text_features, 'pooler_output'):
-            text_features = text_features.pooler_output
+        if not isinstance(text_features, torch.Tensor):
+            if hasattr(text_features, 'text_embeds'):
+                text_features = text_features.text_embeds
+            elif hasattr(text_features, 'pooler_output'):
+                text_features = text_features.pooler_output
+            else:
+                text_features = text_features.last_hidden_state[:, 0, :]
         return text_features.cpu()
