@@ -12,7 +12,8 @@ st.title("Multimodal Misinformation Classifier")
 
 model = CLIPEncoder()
 
-uploaded_image = st.file_uploader("Upload Image", type=["jpg", "png", "jpeg"])
+uploaded_image = st.file_uploader("Upload Image", type=["jpg","png","jpeg"])
+
 caption = st.text_input("Enter Caption")
 
 threshold = 0.26
