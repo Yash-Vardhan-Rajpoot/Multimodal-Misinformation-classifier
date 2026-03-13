@@ -1,77 +1,52 @@
-import sys
-import os
+```python
 import streamlit as st
 from PIL import Image
+import sys
+import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from Model.clip_model import CLIPEncoder
 from Utils.similarity import compute_similarity
 
-
-# Page title
-st.title("Multimodal Misinformation Detector")
-
-st.write("Upload an image and provide a caption to check if they match.")
-
-
-# Load model only once
 @st.cache_resource
 def load_model():
     return CLIPEncoder()
 
-
 model = load_model()
 
+st.set_page_config(page_title="Multimodal Misinformation Detector", layout="centered")
 
-# Upload image
-uploaded_image = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
+st.title("🧠 Multimodal Misinformation Detector")
 
-# Caption input
-caption = st.text_input("Enter Caption")
+uploaded_file = st.file_uploader("Upload an Image", type=["png", "jpg", "jpeg"])
 
+caption = st.text_input("Enter Caption for the Image")
 
-# Similarity threshold
-threshold = 0.26
+threshold = st.slider("Select Similarity Threshold", 0.0, 1.0, 0.26)
 
+if uploaded_file and caption:
 
-# Display uploaded image
-if uploaded_image is not None:
+    image = Image.open(uploaded_file).convert("RGB")
 
-    uploaded_image.seek(0)
-    image = Image.open(uploaded_image).convert("RGB")
+    st.image(image, caption="Uploaded Image", use_column_width=True)
 
-    st.image(image, caption="Uploaded Image", use_container_width=True)
+    if st.button("Check Post"):
 
+        with st.spinner("Analyzing..."):
 
-# Button to run detection
-if st.button("Check Post"):
+            image_embedding = model.encode_image(image)
 
-    if uploaded_image is None or caption.strip() == "":
-        st.warning("Please upload an image and enter a caption.")
+            text_embedding = model.encode_text(caption)
 
-    else:
+            similarity = compute_similarity(image_embedding, text_embedding)
 
-        # Reset pointer before reading again
-        uploaded_image.seek(0)
+        st.subheader(f"Similarity Score: {similarity:.3f}")
 
-        # Generate embeddings
-        image_embedding = model.encode_image(uploaded_image)
-        text_embedding = model.encode_text(caption)
+        st.progress(float(similarity))
 
-        # Compute similarity
-        score = compute_similarity(image_embedding, text_embedding)
-
-        score = float(score)
-
-        # Display similarity score
-        st.subheader("Similarity Score")
-        st.write(round(score, 3))
-
-        st.write("Threshold:", threshold)
-
-        # Classification
-        if score >= threshold:
-            st.success("Caption matches the image")
+        if similarity > threshold:
+            st.error("⚠️ Potential Misinformation Detected")
         else:
-            st.error("Potential Misinformation Detected")
+            st.success("✅ Image and Caption Match")
+```
