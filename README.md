@@ -1,17 +1,17 @@
-# 🧠 Multimodal Misinformation Classifier
+# 🧠 Multimodal Image–Caption Similarity Analyzer
 
-A **Multimodal AI system** that detects potential misinformation by analyzing the **semantic similarity between an image and its caption** using the CLIP vision-language model.
+A **Multimodal AI system** that identifies the **best suited caption for an image** by analyzing the **semantic similarity between visual and textual representations** using the CLIP vision–language model.
 
-The system compares **image embeddings** and **text embeddings** to determine whether the caption accurately represents the image.
+The system compares **image embeddings** and **text embeddings** to determine how well a caption describes the given image.
 
 ---
 
 ## 🚀 Live Demo
 
-🔗 **Try the app here:**
+🔗 **Try the app here:**  
 https://multimodalmisinformationclassifier.streamlit.app/
 
-Upload an image and provide a caption to check whether the caption aligns with the visual content.
+Upload an image and provide multiple captions to see **which caption best matches the image**.
 
 The application is deployed using **Streamlit**.
 
@@ -19,23 +19,26 @@ The application is deployed using **Streamlit**.
 
 ## 💡 Project Idea
 
-Misinformation frequently spreads through **misleading captions paired with images**.
+Images on the internet often have multiple possible descriptions.  
+This project uses a **multimodal AI model** to determine **which caption best represents an image**.
 
 Example:
 
-Image → Flood in Brazil
-Caption → *"Massive flood in India today"*
+Image → Dog running in a park  
 
-Even though the image is real, the caption is **misleading**.
+Captions:
+1. *A dog playing in a grassy park*  
+2. *A cat sleeping on a sofa*  
+3. *A car driving on a highway*
 
-This project detects such cases using **multimodal similarity analysis**.
+The system computes similarity scores and selects the caption that **best aligns with the image content**.
 
 ---
 
 ## 🏗️ System Architecture
 
-Image → CLIP Encoder → Image Embedding
-Caption → CLIP Encoder → Text Embedding
+Image → CLIP Encoder → Image Embedding  
+Captions → CLIP Encoder → Text Embeddings  
 
 ↓
 
@@ -43,28 +46,25 @@ Cosine Similarity
 
 ↓
 
-Threshold Decision
+Caption Ranking
 
 ↓
 
-Classification
+Best Caption Selected
 
-* ✅ Likely Real Information
-* ⚠️ Potential Misinformation
-
-The system uses **CLIP (Contrastive Language-Image Pretraining)** to encode both image and text into the **same embedding space**.
+The system uses **CLIP (Contrastive Language–Image Pretraining)** to encode both image and text into the **same embedding space**, enabling direct comparison between them.
 
 ---
 
 ## 🧠 Model Used
 
-Pretrained Vision-Language Model:
+Pretrained Vision–Language Model:
 
 ```
 openai/clip-vit-base-patch32
 ```
 
-CLIP learns a shared embedding space that allows comparison between **visual content and textual descriptions**.
+CLIP learns a shared representation for **images and text**, allowing similarity comparison between visual content and textual descriptions.
 
 ---
 
@@ -120,24 +120,18 @@ The application will start locally and open in your browser.
 ## 🖥️ How to Use
 
 1. Upload an image
-2. Enter a caption describing the image
-3. The model computes similarity between image and caption
-4. Based on the similarity score, the system predicts:
-
-* **Likely Real Information**
-* **Potential Misinformation**
+2. Enter multiple captions describing the image
+3. The model computes similarity between the image and each caption
+4. Captions are ranked based on similarity score
+5. The caption with the **highest similarity score is selected as the best match**
 
 ---
 
-## 📊 Similarity Threshold
+## 📊 Similarity Computation
 
-Default threshold:
+The similarity between image and caption embeddings is calculated using **cosine similarity**.
 
-```
-0.26
-```
-
-If similarity score < threshold → **Potential Misinformation**
+Higher similarity score → **better caption match**
 
 ---
 
@@ -163,20 +157,20 @@ https://multimodalmisinformationclassifier.streamlit.app/
 
 ## 📌 Future Improvements
 
-* Train a **custom multimodal classifier**
-* Integrate **news fact-checking datasets**
-* Add **image reverse search**
-* Improve detection using **transformer-based multimodal fusion**
-* Build **dataset for misinformation detection**
+* Automatic **caption generation**
+* **Top-k caption ranking**
+* Support for **image–text search**
+* Integration with **large multimodal models**
+* Improve UI with **caption confidence visualization**
 
 ---
 
 ## 👨‍💻 Author
 
-**Yash Vardhan Rajpoot**
-NIT Patna
+**Yash Vardhan Rajpoot**  
+NIT Patna  
 
-GitHub:
+GitHub:  
 https://github.com/Yash-Vardhan-Rajpoot
 
 ---
