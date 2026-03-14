@@ -50,7 +50,7 @@ flowchart TD
     
     G --> H[Caption Ranking]
     H --> I[Best Caption Selected]
-
+```
 The system uses **CLIP (Contrastive Language–Image Pretraining)** to encode both image and text into the **same embedding space**, enabling direct comparison between them.
 
 ---
