@@ -9,7 +9,7 @@ The system compares **image embeddings** and **text embeddings** to determine ho
 ## 🚀 Live Demo
 
 🔗 **Try the app here:**  
-https://multimodalmisinformationclassifier.streamlit.app/
+https://multimodalimagecaptionrankingsystem.streamlit.app/
 
 Upload an image and provide multiple captions to see **which caption best matches the image**.
 
@@ -150,7 +150,7 @@ Higher similarity score → **better caption match**
 
 The project is deployed using **Streamlit** and accessible here:
 
-https://multimodalmisinformationclassifier.streamlit.app/
+https://multimodalimagecaptionrankingsystem.streamlit.app/
 
 ---
 
