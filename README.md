@@ -1,4 +1,4 @@
-# 🧠 Multimodal Image–Caption Similarity Analyzer
+# 🧠 Image–Caption Similarity Analyzer
 
 A **Multimodal AI system** that identifies the **best suited caption for an image** by analyzing the **semantic similarity between visual and textual representations** using the CLIP vision–language model.
 
@@ -71,15 +71,15 @@ CLIP learns a shared representation for **images and text**, allowing similarity
 ## 📂 Project Structure
 
 ```
-Multimodal_Misinformation_classifier
+Image_Caption_Similarity_Analyzer
 │
-├── Multimodal Misinformation Classifier
+├── Image Caption Similarity Analyzer
 │   │
 │   ├── App
-│   │   └── app_fixed.py          # Streamlit UI
+│   │   └── app_fixed.py          # Streamlit UI for image and caption comparison
 │   │
 │   ├── Model
-│   │   └── clip_model.py         # CLIP encoder
+│   │   └── clip_model.py         # CLIP encoder for generating embeddings
 │   │
 │   └── Utils
 │       └── similarity.py         # cosine similarity computation
