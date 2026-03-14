@@ -37,18 +37,21 @@ The system computes similarity scores and selects the caption that **best aligns
 
 ## 🏗️ System Architecture
 
-Image → CLIP Encoder → Image Embedding  
-Captions → CLIP Encoder → Text Embeddings  
+ Image              Captions
+   ↓                   ↓  
+CLIP Encoder       CLIP Encoder
+   ↓                   ↓ 
+Image Embedding    Text Embeddings  
 
-↓
+  ↓
 
 Cosine Similarity
 
-↓
+  ↓
 
 Caption Ranking
 
-↓
+  ↓
 
 Best Caption Selected
 
@@ -95,8 +98,8 @@ Image_Caption_Similarity_Analyzer
 Clone the repository:
 
 ```
-git clone https://github.com/Yash-Vardhan-Rajpoot/Multimodal_Misinformation_classifier.git
-cd Multimodal_Misinformation_classifier
+git clone https://github.com/Yash-Vardhan-Rajpoot/Multimodal_Image_Caption_Ranking_System.git
+cd Multimodal Image Caption Ranking System
 ```
 
 Install dependencies:
@@ -110,7 +113,7 @@ pip install -r requirements.txt
 ## ▶️ Run the Application
 
 ```
-streamlit run "Multimodal Misinformation Classifier/App/app_fixed.py"
+streamlit run "Multimodal Image Caption Ranking System/App/app_fixed.py"
 ```
 
 The application will start locally and open in your browser.
